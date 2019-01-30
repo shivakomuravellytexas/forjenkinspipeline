@@ -1,0 +1,24 @@
+node{
+ stage('scm')
+{
+  //git clone
+   git 'https://github.com/openmrs/openmrs-core.git'
+ }
+stage('building the package')
+{
+  //mvn package
+  sh 'mvn package'
+ }
+stage('archiving')
+{
+  // archiving
+  archive 'target/*.jar'
+}
+stage('test results')
+{
+ //junit test results
+ junit 'target/surefire-reports/*.xml'
+}
+}
+ 
+    
